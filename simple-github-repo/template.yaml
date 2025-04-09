@@ -54,7 +54,7 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoUrl: ${{ steps.publish.output.repoContentsUrl | replace('github.com', 'raw.githubusercontent.com') | replace('/tree/', '/') }}/catalog-info.yaml
-        dryRun: true
+        
   
   output:
     links:
