@@ -53,7 +53,7 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: catalog-info.yaml
+        catalogInfoUrl: ${{ steps.publish.output.repoContentsUrl | replace('github.com', 'raw.githubusercontent.com') | replace('/tree/', '/') }}/catalog-info.yaml
 
   output:
     links:
