@@ -29,7 +29,7 @@ spec:
       input:
         allowedHosts: ['github.com']
         description: Repo created via Backstage template
-        repoUrl: github.com/${{ parameters.owner }}/${{ parameters.repoName }}
+        repoUrl: github.com?owner=${{ parameters.repoOwner }}&repo=${{ parameters.repoName }}
         defaultBranch: main
         files:
           - path: README.md
