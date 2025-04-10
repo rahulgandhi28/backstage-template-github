@@ -1,10 +1,13 @@
-apiVersion: backstage.io/v1alpha1
-kind: Component
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
 metadata:
-  name: backstage-template-github
-  annotations:
-    github.com/project-slug: rahulgandhi28/backstage-template-github
+  name: simple-github-repo
+  title: Simple GitHub Repo Template
+  description: Creates a new GitHub repository with a README
+  tags:
+    - github
+    - scaffolder
 spec:
-  type: other
-  lifecycle: unknown
-  owner: guests
+  owner: user:guest
+  type: service
+  path: ./template.yaml
