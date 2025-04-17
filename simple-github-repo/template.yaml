@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: simple-github-repo
-  title: Simple GitHub Repo Template
-  description: Creates a new GitHub repository with a README
+  name: full-github-template
+  title: GitHub Repo with Logging and Fetch
+  description: Creates a GitHub repo with templated files and logs debug info
 spec:
   owner: user:guest
   type: service
@@ -19,41 +19,45 @@ spec:
           title: Repository Name
         owner:
           type: string
-          title: GitHub Organization/User
-          description: GitHub org or username to create the repo under
+          title: GitHub Org/User
+          description: GitHub organization or username to create the repo under
 
   steps:
+    - id: fetch-template-files
+      name: Fetch Template Files
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.repoName }}
+
+    
+
+    - id: log-debug-info
+      name: Log Inputs
+      action: debug:log
+      input:
+        message: |
+          Logging Inputs:
+          Repo Name: ${{ parameters.repoName }}
+          Owner: ${{ parameters.owner }}
+
     - id: publish
-      name: Create GitHub Repo
+      name: Publish to GitHub
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: Repo created via Backstage template
+        description: Created from Backstage Template
         repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
         defaultBranch: main
-        files:
-          - path: README.md
-            content: |
-              # ${{ parameters.repoName }}
-              This repository was scaffolded using a Backstage template.
-          - path: catalog-info.yaml
-            content: |
-              apiVersion: backstage.io/v1alpha1
-              kind: Component
-              metadata:
-                name: ${{ parameters.repoName }}
-                description: A simple repo created via Backstage
-              spec:
-                type: service
-                owner: user:guest
-                lifecycle: experimental
 
     - id: register
-      name: Register in Backstage
+      name: Register in Backstage Catalog
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: /catalog-info.yaml  
+        catalogInfoPath: /catalog-info.yaml
+
   output:
     links:
       - title: GitHub Repository
