@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ name }}
+  description: A simple repo created via Backstage template
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental
