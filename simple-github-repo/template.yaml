@@ -23,6 +23,26 @@ spec:
           description: GitHub org or username to create the repo under
 
   steps:
+    - id: fetch-template-files
+      name: Fetch Template Files
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.repoName }}
+
+    
+
+    - id: log-debug-info
+      name: Log Inputs
+      action: debug:log
+      input:
+        message: |
+          Logging Inputs:
+          Repo Name: ${{ parameters.repoName }}
+          Owner: ${{ parameters.owner }}
+
+          
     - id: publish
       name: Create GitHub Repo
       action: publish:github
