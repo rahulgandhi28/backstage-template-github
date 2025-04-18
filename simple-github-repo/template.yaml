@@ -51,29 +51,17 @@ spec:
         description: Repo created via Backstage template
         repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
         defaultBranch: main
-        files:
-          - path: README.md
-            content: |
-              # ${{ parameters.repoName }}
-              This repository was scaffolded using a Backstage template.
-          - path: catalog-info.yaml
-            content: |
-              apiVersion: backstage.io/v1alpha1
-              kind: Component
-              metadata:
-                name: ${{ parameters.repoName }}
-                description: A simple repo created via Backstage
-              spec:
-                type: service
-                owner: user:guest
-                lifecycle: experimental
-
+        
     - id: register
       name: Register in Backstage
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: /catalog-info.yaml  
+        spec:
+                type: service
+                owner: user:guest
+                lifecycle: experimental
   output:
     links:
       - title: GitHub Repository
