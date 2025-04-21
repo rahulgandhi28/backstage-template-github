@@ -10,4 +10,4 @@ metadata:
 spec:
   owner: user:guest
   type: service
-  path: ./simple-github-repo/template.yaml
+  path: ./template.yaml
