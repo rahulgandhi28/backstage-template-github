@@ -33,35 +33,7 @@ spec:
 
     
 
-    - id: log-debug-info
-      name: Log Inputs
-      action: debug:log
-      input:
-        message: |
-          Logging Inputs:
-          Repo Name: ${{ parameters.repoName }}
-          Owner: ${{ parameters.owner }}
-
-          
-    - id: publish
-      name: Create GitHub Repo
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: Repo created via Backstage template
-        repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
-        defaultBranch: main
-        
-    - id: register
-      name: Register in Backstage
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: /catalog-info.yaml  
-        spec:
-                type: service
-                owner: user:guest
-                lifecycle: experimental
+    
   output:
     links:
       - title: GitHub Repository
