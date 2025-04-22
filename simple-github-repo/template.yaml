@@ -40,6 +40,14 @@ spec:
           Repo Name: ${{ parameters.repoName }}
           Owner: ${{ parameters.owner }}
 
+    - id: publish
+      name: Create GitHub Repo
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: Repo created via Backstage template
+        repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
+        defaultBranch: main
 
     
   output:
