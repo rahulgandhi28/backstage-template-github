@@ -31,7 +31,15 @@ spec:
         values:
           name: ${{ parameters.repoName }}
 
-    
+    - id: log-debug-info
+      name: Log Inputs
+      action: debug:log
+      input:
+        message: |
+          Logging Inputs:
+          Repo Name: ${{ parameters.repoName }}
+          Owner: ${{ parameters.owner }}
+
 
     
   output:
