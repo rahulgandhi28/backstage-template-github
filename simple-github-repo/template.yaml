@@ -49,6 +49,11 @@ spec:
         repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
         defaultBranch: main
 
+    - id: register
+      name: Register in Backstage
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
     
   output:
     links:
