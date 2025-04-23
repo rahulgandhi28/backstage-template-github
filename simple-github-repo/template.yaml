@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: simple-github-repo1
+  name: simple-github-repo2
   title: Create GitHub Repo Template
   description: Creates a new GitHub repository with a README
 spec:
