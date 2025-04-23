@@ -49,7 +49,12 @@ spec:
         repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
         defaultBranch: main
 
-    
+     - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'  
     
   output:
     links:
